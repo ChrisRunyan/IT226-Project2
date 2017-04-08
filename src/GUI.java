@@ -25,6 +25,10 @@ public class GUI extends JFrame {
 	JButton addTimer = new JButton();
 	JButton delete = new JButton();
 
+	GUIHelper newGUI = new GUIHelper(1);
+	GUIHelper newGUI2 = new GUIHelper(2);
+	GUIHelper newGUI3 = new GUIHelper(3);
+
 	public GUI() {
 		frame.add(firstPanel);
 
@@ -55,7 +59,7 @@ public class GUI extends JFrame {
 			if (event.getActionCommand() == "Add an Alarm") {
 				System.out.println("ALARM");
 
-				GUIHelper newGUI = new GUIHelper(1);
+				// GUIHelper newGUI = new GUIHelper(1);
 				newGUI.setTitle("Add an alarm");
 				newGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				newGUI.setSize(150, 300);
@@ -65,14 +69,20 @@ public class GUI extends JFrame {
 			if (event.getActionCommand() == "Add a Timer") {
 				System.out.println("TIMER");
 
-				GUIHelper newGUI2 = new GUIHelper(2);
-				newGUI2.setTitle("Add an alarm");
+				// GUIHelper newGUI2 = new GUIHelper(2);
+				newGUI2.setTitle("Add a Timer");
 				newGUI2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				newGUI2.setSize(150, 300);
 				newGUI2.setVisible(true);
 			}
 			if (event.getActionCommand() == "Delete") {
 				System.out.println("DELETE");
+
+				newGUI3.setTitle("Delete");
+				newGUI3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				newGUI3.setSize(150, 300);
+				newGUI3.setVisible(true);
+
 			}
 
 		}

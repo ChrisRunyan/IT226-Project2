@@ -60,6 +60,7 @@ public class dataInput {
 
 	public String dateToString() {
 		String tostring = "";
+
 		tostring += month;
 		tostring += "--";
 		tostring += day;
@@ -74,7 +75,7 @@ public class dataInput {
 	}
 
 	public String timerToString() {
-		return "Timer set for " + timer + " minutes";
+		return "Timer set for  " + timer + " minutes";
 	}
 
 }

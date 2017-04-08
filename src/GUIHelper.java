@@ -32,7 +32,7 @@ public class GUIHelper extends JFrame {
 	JFrame timerFrame = new JFrame();
 	JFrame deleteFrame = new JFrame();
 
-	JLabel label;
+	JButton[] arrayOfAlarms;
 
 	JButton alarmButton = new JButton();
 	JButton timerButton = new JButton();
@@ -92,6 +92,35 @@ public class GUIHelper extends JFrame {
 			timerButton.addActionListener(new KeyActionListener());
 
 			add(setTimer);
+		}
+		if (promptNum == 3) {
+			deleteFrame.add(delete);
+
+			arrayOfAlarms = new JButton[10];
+
+			/*
+			 * 
+			 * 
+			 * for "i < 5" , the 5 should be changed to the amount of alarms and
+			 * timers we have.
+			 * 
+			 * for "LINKED LIST" it should print out a list of the
+			 * alarms/timers.
+			 * 
+			 */
+			for (int i = 0; i < 5; i++) {
+				arrayOfAlarms[i] = new JButton();
+
+				arrayOfAlarms[i].setText("Alarm " + (i + 1) + " - " + "LINKED LIST");
+
+				delete.add(arrayOfAlarms[i]);
+
+				arrayOfAlarms[i].addActionListener(new KeyActionListener());
+
+				add(delete);
+
+			}
+
 		}
 
 	}
@@ -181,8 +210,30 @@ public class GUIHelper extends JFrame {
 				System.out.println(di.timerToString());
 
 			}
+
 			if (event.getActionCommand() == "Delete") {
 				System.out.println("DELETE");
+			}
+
+			/*
+			 * for "i < 6" , 6 should be the length of the linked list of alarms
+			 * and timers + 1
+			 */
+			for (int i = 0; i < 6; i++) {
+
+				String s = "Alarm " + (i + 1) + " - " + "LINKED LIST";
+
+				if (s.equals(event.getActionCommand())) {
+					System.out.println("Delete Timer " + (i + 1));
+
+					/*
+					 * 
+					 * CODE TO DELETE ALARM/TIMER FROM LINKED LIST
+					 * 
+					 */
+
+				}
+
 			}
 
 		}
