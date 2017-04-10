@@ -1,3 +1,4 @@
+package edu.ilstu;
 import javax.swing.JFrame;
 
 /**

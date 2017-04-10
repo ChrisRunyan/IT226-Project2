@@ -1,3 +1,4 @@
+package edu.ilstu;
 
 public class dataInput {
 	String year = "";
