@@ -60,7 +60,7 @@ public class GUIHelper extends JFrame {
 			setAlarm.add(f4);
 			f4.addKeyListener(new KeyActionListener());
 
-			f5 = new JTextField("minute (60)");
+			f5 = new JTextField("Minute (60)");
 			f5.setPreferredSize(nd);
 			setAlarm.add(f5);
 			f5.addKeyListener(new KeyActionListener());
@@ -77,7 +77,7 @@ public class GUIHelper extends JFrame {
 
 			JLabel l1 = new JLabel();
 			setTimer.add(l1);
-			l1.setText("Enter input in minutes");
+			l1.setText("Enter time (minutes):");
 			f6 = new JTextField("");
 			f6.setPreferredSize(nd);
 			setTimer.add(f6);

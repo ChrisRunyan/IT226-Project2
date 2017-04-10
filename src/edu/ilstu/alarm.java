@@ -1,7 +1,5 @@
 package edu.ilstu;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,10 +38,11 @@ public class Alarm {
 		Scanner reader = null;
 		
 	    try{
-	    	reader=new Scanner(new BufferedReader(new FileReader("C:\\Users\\hoang peo\\workspace\\project1\\sss.csv")));
+	    	reader=new Scanner(new BufferedReader(new FileReader("alarm.csv")));
 		}
 		catch(FileNotFoundException e1){
-			System.out.println("Invalid filename entered. Try again.");
+			//**Print to showAlarms and showTimers that file could not be read
+//			System.out.println("Invalid filename entered. Try again.");
 		}
 	        
 	    LinkedList<String> lines= new LinkedList<String>();
@@ -75,7 +74,7 @@ public class Alarm {
 			sb.append('\n');
 		}
 		
-		System.out.println(sb.toString());
+//		System.out.println(sb.toString());
 		return sb.toString();
 	}
 

@@ -10,13 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
- * @author Kevin
+ * @author Kevin Haas, Christopher Runyan
  *
  */
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
 	JPanel topPanel = new JPanel();
-	JPanel centerPanel = new JPanel();
+	JPanel middlePanel = new JPanel();
+	JPanel bottomPanel = new JPanel();
 	JPanel finalPanel = new JPanel();
 	
 	JButton addAlarm = new JButton();
@@ -30,40 +31,43 @@ public class GUI extends JFrame {
 	GUIHelper addTimerGUI = new GUIHelper(2);
 	GUIHelper deleteGUI = new GUIHelper(3);
 	
+	ShowClock clock=new ShowClock();
+	
 	public GUI() {
 		//what is added to the JFrame
-		finalPanel.setLayout(new GridLayout(2, 1, 5, 5));
+		finalPanel.setLayout(new GridLayout(3, 1, 5, 5));
 		
 		//two panels that go into finalPanel
-		topPanel.setLayout(new GridLayout(1, 3, 5, 5));
-		centerPanel.setLayout(new GridLayout(1, 2, 5, 5));
+		middlePanel.setLayout(new GridLayout(1, 3, 5, 5));
+		bottomPanel.setLayout(new GridLayout(1, 2, 5, 5));
 		
 		//for top panel
 		addAlarm.setText("Add an Alarm");
-		topPanel.add(addAlarm);
+		middlePanel.add(addAlarm);
 		addAlarm.addActionListener(new ActionListener1());
 
 		addTimer.setText("Add a Timer");
-		topPanel.add(addTimer);
+		middlePanel.add(addTimer);
 		addTimer.addActionListener(new ActionListener1());
 
 		delete.setText("Delete a Timer/Alarm");
-		topPanel.add(delete);
+		middlePanel.add(delete);
 		delete.addActionListener(new ActionListener1());
 		
 		//for center panel
 		showAlarms.setText("Current Alarms:\n");
-		centerPanel.add(showAlarms);
+		bottomPanel.add(showAlarms);
 		showAlarms.setEditable(false);
 //		showAlarms.setFont(getFont().deriveFont(4.0f));
 		
 		showTimers.setText("Current Timers:\n");
-		centerPanel.add(showTimers);
+		bottomPanel.add(showTimers);
 		showTimers.setEditable(false);
 //		showTimers.setFont(getFont().deriveFont(4.0f));
 		
-		finalPanel.add(topPanel);
-		finalPanel.add(centerPanel);
+		finalPanel.add(clock.showClock(topPanel));
+		finalPanel.add(middlePanel);
+		finalPanel.add(bottomPanel);
 		add(finalPanel);
 	}
 

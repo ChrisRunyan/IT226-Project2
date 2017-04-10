@@ -10,7 +10,8 @@ public class Driver {
 		GUI newGUI = new GUI();
 		newGUI.setTitle("Alarm");
 		newGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		newGUI.setSize(640, 360);
+//		newGUI.setSize(640, 360);
+		newGUI.setSize(650, 400);
 		newGUI.setVisible(true);
 		newGUI.setResizable(false);
 	}

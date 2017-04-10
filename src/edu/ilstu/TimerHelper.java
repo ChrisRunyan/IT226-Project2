@@ -1,5 +1,4 @@
 package edu.ilstu;
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
