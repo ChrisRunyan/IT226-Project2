@@ -1,6 +1,5 @@
 
 public class dataInput {
-
 	String year = "";
 	String month = "";
 	String day = "";
@@ -33,6 +32,30 @@ public class dataInput {
 	public void setTimerInMinutes(char c) {
 		timer = timer + c;
 	}
+	
+	
+	
+	public void setYear1(String year) {
+
+		this.year = year;
+
+	}
+
+	public void setMinute1(String min) {
+		this.minute = min;
+	}
+
+	public void setMonth1(String month) {
+		this.month = month;
+	}
+
+	public void setHour1(String hour) {
+		this.hour = hour;
+	}
+
+	public void setDay1(String day) {
+		this.day = day;
+	}
 
 	public void resetYear() {
 		year = "";
@@ -62,13 +85,13 @@ public class dataInput {
 		String tostring = "";
 
 		tostring += month;
-		tostring += "--";
+		tostring += "/";
 		tostring += day;
-		tostring += "--";
+		tostring += "/";
 		tostring += year;
-		tostring += " at  ";
+		tostring += " ";
 		tostring += hour;
-		tostring += "::";
+		tostring += ":";
 		tostring += minute;
 
 		return tostring;

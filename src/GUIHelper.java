@@ -42,7 +42,7 @@ public class GUIHelper extends JFrame {
 	public GUIHelper(int promptNum) {
 
 		if (promptNum == 1) {
-			alarmFrame.add(setAlarm);
+			alarmFrame.getContentPane().add(setAlarm);
 
 			f1 = new JTextField("Year (yyyy)");
 			f1.setPreferredSize(nd);
@@ -73,10 +73,10 @@ public class GUIHelper extends JFrame {
 			setAlarm.add(alarmButton);
 			alarmButton.addActionListener(new KeyActionListener());
 
-			add(setAlarm);
+			getContentPane().add(setAlarm);
 		}
 		if (promptNum == 2) {
-			timerFrame.add(setTimer);
+			timerFrame.getContentPane().add(setTimer);
 
 			JLabel l1 = new JLabel();
 			setTimer.add(l1);
@@ -91,10 +91,10 @@ public class GUIHelper extends JFrame {
 			setTimer.add(timerButton);
 			timerButton.addActionListener(new KeyActionListener());
 
-			add(setTimer);
+			getContentPane().add(setTimer);
 		}
 		if (promptNum == 3) {
-			deleteFrame.add(delete);
+			deleteFrame.getContentPane().add(delete);
 
 			arrayOfAlarms = new JButton[10];
 
@@ -117,7 +117,7 @@ public class GUIHelper extends JFrame {
 
 				arrayOfAlarms[i].addActionListener(new KeyActionListener());
 
-				add(delete);
+				getContentPane().add(delete);
 
 			}
 

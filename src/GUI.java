@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import java.awt.event.*;
 /**
  * 
  */
@@ -30,7 +30,7 @@ public class GUI extends JFrame {
 	GUIHelper newGUI3 = new GUIHelper(3);
 
 	public GUI() {
-		frame.add(firstPanel);
+		
 
 		addAlarm.setText("Add an Alarm");
 		addAlarm.setPreferredSize(new Dimension(200, 100));
