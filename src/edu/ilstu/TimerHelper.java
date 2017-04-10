@@ -17,8 +17,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class timer extends JFrame {
-
+@SuppressWarnings("serial")
+public class TimerHelper extends JFrame {
 	private JPanel contentPane;
 	private Timer t;
 	public int count = 10;
@@ -31,7 +31,7 @@ public class timer extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					timer frame = new timer();
+					TimerHelper frame = new TimerHelper();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class timer extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public timer() {
+	public TimerHelper() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -104,11 +104,9 @@ public class timer extends JFrame {
 				int a;
 				a = Integer.parseInt(txtSeconds.getText());
 				count = a;
-				
 			}
 		});
 		btnAdd.setBounds(12, 112, 97, 25);
 		contentPane.add(btnAdd);
 	}
-
 }

@@ -1,6 +1,6 @@
 package edu.ilstu;
 
-public class dataInput {
+public class DataInput {
 	String year = "";
 	String month = "";
 	String day = "";
@@ -9,9 +9,7 @@ public class dataInput {
 	String timer = "";
 
 	public void setYear(char c) {
-
 		year = year + c;
-
 	}
 
 	public void setMinute(char c) {
@@ -34,12 +32,8 @@ public class dataInput {
 		timer = timer + c;
 	}
 	
-	
-	
 	public void setYear1(String year) {
-
 		this.year = year;
-
 	}
 
 	public void setMinute1(String min) {
@@ -101,5 +95,4 @@ public class dataInput {
 	public String timerToString() {
 		return "Timer set for  " + timer + " minutes";
 	}
-
 }

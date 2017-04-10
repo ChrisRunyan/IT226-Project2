@@ -11,10 +11,8 @@ import javax.swing.SwingConstants;
 import java.util.*;
 import java.text.*;
  
-public class showclock {
- 
+public class ShowClock {
   public static void main(String[] arguments) {
- 
     ClockLabel dateLable = new ClockLabel("date");
     dateLable.setForeground(Color.BLACK);
     ClockLabel timeLable = new ClockLabel("time");
@@ -40,7 +38,6 @@ public class showclock {
 }
  
 class ClockLabel extends JLabel implements ActionListener {
- 
   String type;
   SimpleDateFormat sdf;
  

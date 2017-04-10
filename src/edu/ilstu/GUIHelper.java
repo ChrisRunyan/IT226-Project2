@@ -12,16 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * 
- */
-
-/**
  * @author Kevin
  *
  */
 public class GUIHelper extends JFrame {
-
-	dataInput di = new dataInput();
+	DataInput di = new DataInput();
 
 	JPanel setAlarm = new JPanel();
 	JPanel setTimer = new JPanel();
@@ -41,7 +36,6 @@ public class GUIHelper extends JFrame {
 	Dimension nd = new Dimension(100, 25);
 
 	public GUIHelper(int promptNum) {
-
 		if (promptNum == 1) {
 			alarmFrame.getContentPane().add(setAlarm);
 
@@ -119,13 +113,10 @@ public class GUIHelper extends JFrame {
 				arrayOfAlarms[i].addActionListener(new KeyActionListener());
 
 				getContentPane().add(delete);
-
 			}
-
 		}
-
 	}
-
+	
 	class KeyActionListener implements KeyListener, ActionListener {
 
 		// String year, month, day, hour, minute = "";
@@ -133,7 +124,6 @@ public class GUIHelper extends JFrame {
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-
 			if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
 				if (e.getSource().equals(f1)) {
 
@@ -164,20 +154,16 @@ public class GUIHelper extends JFrame {
 
 					di.resetTimer();
 					f6.setText("");
-
 				}
 			}
-
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
-
 		}
 
 		public void keyTyped(KeyEvent e) {
-
 			if (e.getSource().equals(f1)) {
 				di.setYear(e.getKeyChar());
 
@@ -195,23 +181,17 @@ public class GUIHelper extends JFrame {
 
 			} else if (e.getSource().equals(f6)) {
 				di.setTimerInMinutes(e.getKeyChar());
-
 			}
-
 		}
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-
 			if (event.getActionCommand() == "Save Alarm") {
 				System.out.println(di.dateToString());
 			}
 			if (event.getActionCommand() == "Set Timer") {
-
 				System.out.println(di.timerToString());
-
 			}
-
 			if (event.getActionCommand() == "Delete") {
 				System.out.println("DELETE");
 			}
@@ -221,7 +201,6 @@ public class GUIHelper extends JFrame {
 			 * and timers + 1
 			 */
 			for (int i = 0; i < 6; i++) {
-
 				String s = "Alarm " + (i + 1) + " - " + "LINKED LIST";
 
 				if (s.equals(event.getActionCommand())) {
@@ -232,13 +211,8 @@ public class GUIHelper extends JFrame {
 					 * CODE TO DELETE ALARM/TIMER FROM LINKED LIST
 					 * 
 					 */
-
 				}
-
 			}
-
 		}
-
 	}
-
 }

@@ -12,22 +12,21 @@ import java.util.Scanner;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class alarm {
-	public LinkedList<dataInput> input = new LinkedList<dataInput>();
+public class Alarm {
+	public LinkedList<DataInput> input = new LinkedList<DataInput>();
 	public String currentTime;
+	
 	//get current time 
 	public String gettime(){
 		Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         currentTime = sdf.format(cal.getTime());
-       return currentTime;
+        return currentTime;
 	}
 	
-	
-	
 	// set an alarm 
-	public void setAlarm(String year, String month,String day, String hours, String min,LinkedList<dataInput> data ){
-		dataInput a = new dataInput();
+	public void setAlarm(String year, String month,String day, String hours, String min,LinkedList<DataInput> data ){
+		DataInput a = new DataInput();
 		a.setDay1(day);
 		a.setHour1(hours);
 		a.setMinute1(min);
@@ -36,36 +35,38 @@ public class alarm {
 		data.add(a);
 	}
 	
-	
 	//read data from csv file and then put them to dataInput data
-	public void readData(LinkedList<dataInput> data)throws FileNotFoundException{
+	public void readData(LinkedList<DataInput> data)throws FileNotFoundException{
+		Scanner reader = null;
 		
-		 Scanner reader = null;
-	        try{
-				reader=new Scanner(new BufferedReader(new FileReader("C:\\Users\\hoang peo\\workspace\\project1\\sss.csv")));
-			}
-			catch(FileNotFoundException e1){
-				System.out.println("Invalid filename entered. Try again.");
-			}
-	        LinkedList<String> lines= new LinkedList<String>();
-	        int counter = 0;
-	        while(reader.hasNextLine()){
-				lines.add(reader.nextLine());
-				String[] splice = lines.get(counter).split(",");
-				dataInput x = new dataInput();
-				x.setMonth1(splice[0]);
-				x.setDay1(splice[1]);
-				x.setYear1(splice[2]);
-				x.setHour1(splice[3]);
-				x.setMinute1(splice[4]);
-				data.add(x);
-				counter++;
-	        }
-	        reader.close();
+	    try{
+	    	reader=new Scanner(new BufferedReader(new FileReader("C:\\Users\\hoang peo\\workspace\\project1\\sss.csv")));
+		}
+		catch(FileNotFoundException e1){
+			System.out.println("Invalid filename entered. Try again.");
+		}
+	        
+	    LinkedList<String> lines= new LinkedList<String>();
+	    int counter = 0;
+	    
+	    while(reader.hasNextLine()){
+	    	lines.add(reader.nextLine());
+	    	String[] splice = lines.get(counter).split(",");
+			DataInput x = new DataInput();
+			x.setMonth1(splice[0]);
+			x.setDay1(splice[1]);
+			x.setYear1(splice[2]);
+			x.setHour1(splice[3]);
+			x.setMinute1(splice[4]);
+			data.add(x);
+			counter++;
+	    }
+	    
+	    reader.close();
 	}
 	
 	// print out the list of alarm from dataInput data
-	public String printAlarmList(LinkedList<dataInput> data)
+	public String printAlarmList(LinkedList<DataInput> data)
 	{ 
 		StringBuilder sb= new StringBuilder();
 		
@@ -73,23 +74,24 @@ public class alarm {
 			sb.append( data.get(i).dateToString());
 			sb.append('\n');
 		}
+		
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
-	
-	
-	
-	
+
 	// save data from linkedlist to csv file, use the datainput linkedlist 
-	public void saveData(LinkedList<dataInput> data){
+	public void saveData(LinkedList<DataInput> data){
 		PrintWriter writer = null;
+		
 		try{
 			writer=new PrintWriter("alarm.csv");
 		}
 		catch(IOException e){
 			e.printStackTrace();
 		}
+		
 		StringBuilder sb = new StringBuilder();
+		
 		for(int i = 0; i< data.size() ; i++){
         	sb.append(data.get(i).month);
         	sb.append(',');
@@ -101,15 +103,14 @@ public class alarm {
         	sb.append(',');
         	sb.append(data.get(i).minute);
 	        sb.append('\n');
-    }
-		   writer.write(sb.toString());
-	   	   writer.close();
+		}
+		
+		writer.write(sb.toString());
+	   	writer.close();
 	}
-	 
 	
 	//return true if get right time ( can use it to get notification ) 
-	public boolean checkAlarm(dataInput a){
-		
+	public boolean checkAlarm(DataInput a){
 		if(a.dateToString().equals(currentTime)){
 			return true;
 		}
@@ -118,24 +119,16 @@ public class alarm {
 		}
 	}
 	
-	
 	// delete alarm which march key from dataInput data
-	public void deleteAlarm(LinkedList<dataInput> data, String key){
+	public void deleteAlarm(LinkedList<DataInput> data, String key){
 		int index = 0;
+		
 		for(int i = 0 ; i < data.size(); i++){
 			if(key.equals(data.get(i).dateToString())){
 				index = i;
 			}
 		}
+		
 		data.remove(index);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

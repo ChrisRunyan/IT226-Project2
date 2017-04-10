@@ -7,9 +7,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.event.*;
-/**
- * 
- */
 
 /**
  * @author Kevin
@@ -17,22 +14,19 @@ import java.awt.event.*;
  */
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
-
 	JPanel firstPanel = new JPanel();
-
+	
 	JFrame frame = new JFrame();
-
+	
 	JButton addAlarm = new JButton();
 	JButton addTimer = new JButton();
 	JButton delete = new JButton();
-
+	
 	GUIHelper newGUI = new GUIHelper(1);
 	GUIHelper newGUI2 = new GUIHelper(2);
 	GUIHelper newGUI3 = new GUIHelper(3);
-
+	
 	public GUI() {
-		
-
 		addAlarm.setText("Add an Alarm");
 		addAlarm.setPreferredSize(new Dimension(200, 100));
 		firstPanel.add(addAlarm);
@@ -49,14 +43,11 @@ public class GUI extends JFrame {
 		delete.addActionListener(new ActionListener1());
 
 		add(firstPanel);
-
 	}
 
 	class ActionListener1 implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent event) {
-
 			if (event.getActionCommand() == "Add an Alarm") {
 				System.out.println("ALARM");
 
@@ -83,10 +74,7 @@ public class GUI extends JFrame {
 				newGUI3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				newGUI3.setSize(150, 300);
 				newGUI3.setVisible(true);
-
 			}
-
 		}
-
 	}
 }
