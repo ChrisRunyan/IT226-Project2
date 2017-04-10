@@ -15,6 +15,7 @@ import javax.swing.JTextField;
  * @author Kevin
  *
  */
+@SuppressWarnings("serial")
 public class GUIHelper extends JFrame {
 	DataInput di = new DataInput();
 
@@ -69,6 +70,7 @@ public class GUIHelper extends JFrame {
 			alarmButton.addActionListener(new KeyActionListener());
 
 			getContentPane().add(setAlarm);
+			//**Set alarm
 		}
 		if (promptNum == 2) {
 			timerFrame.getContentPane().add(setTimer);
@@ -87,6 +89,7 @@ public class GUIHelper extends JFrame {
 			timerButton.addActionListener(new KeyActionListener());
 
 			getContentPane().add(setTimer);
+			//**Set timer
 		}
 		if (promptNum == 3) {
 			deleteFrame.getContentPane().add(delete);
@@ -114,6 +117,7 @@ public class GUIHelper extends JFrame {
 
 				getContentPane().add(delete);
 			}
+			//**Delete alarm associated with i
 		}
 	}
 	
