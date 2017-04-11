@@ -7,6 +7,7 @@ public class DataInput {
 	String hour = "";
 	String minute = "";
 	String timer = "";
+	String message = "";
 
 	public void setYear(char c) {
 		year = year + c;
@@ -32,6 +33,10 @@ public class DataInput {
 		timer = timer + c;
 	}
 	
+	public void setMessage(char c) {
+		message = message + c;
+	}
+	
 	public void setYear1(String year) {
 		this.year = year;
 	}
@@ -52,6 +57,10 @@ public class DataInput {
 		this.day = day;
 	}
 
+	public void setMessage1(String message){
+		this.message=message;
+	}
+	
 	public void resetYear() {
 		year = "";
 	}
@@ -74,6 +83,10 @@ public class DataInput {
 
 	public void resetTimer() {
 		timer = "";
+	}
+	
+	public void resetMessage() {
+		message = "";
 	}
 
 	public String dateToString() {

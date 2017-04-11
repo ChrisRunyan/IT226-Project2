@@ -14,17 +14,21 @@ public class Driver {
 				
 		try {
 			alarm.readData();
+			StringBuilder sbAlarms=new StringBuilder();
+			sbAlarms.append("Current Alarms:\n");
 			for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
-				alarm.scheduleAlarm();
+				GUIHelper.alarmLinkedList.get(i).scheduleAlarm();
+				sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
+				GUI.showAlarms.setText(sbAlarms.toString());
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		
 		newGUI.setTitle("Alarm");
-		newGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		newGUI.setSize(640, 360);
 		newGUI.setVisible(true);
 		newGUI.setResizable(false);
+		newGUI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

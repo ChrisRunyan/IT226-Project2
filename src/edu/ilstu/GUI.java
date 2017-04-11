@@ -25,11 +25,6 @@ public class GUI extends JFrame {
 	JButton delete = new JButton();
 	
 	static JTextArea showAlarms=new JTextArea();
-	static JTextArea showTimers=new JTextArea();
-	
-	
-	
-	
 	
 	public GUI() {
 		//what is added to the JFrame
@@ -62,15 +57,6 @@ public class GUI extends JFrame {
 			}
 		}
 		
-		showTimers.setText("Current Timers:\n");
-		bottomPanel.add(showTimers);
-		showTimers.setEditable(false);
-		for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
-			if(GUIHelper.alarmLinkedList.get(i).timer==true){
-				showAlarms.setText(GUIHelper.alarmLinkedList.get(i).toString());
-			}
-		}
-		
 		finalPanel.add(middlePanel);
 		finalPanel.add(bottomPanel);
 		add(finalPanel);
@@ -91,7 +77,7 @@ public class GUI extends JFrame {
 				GUIHelper addTimerGUI = new GUIHelper(2);
 				addTimerGUI.setTitle("Add a Timer");
 				addTimerGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				addTimerGUI.setSize(400, 175);
+				addTimerGUI.setSize(600, 175);
 				addTimerGUI.setVisible(true);
 				addTimerGUI.setResizable(false);
 			}

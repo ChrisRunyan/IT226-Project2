@@ -21,6 +21,7 @@ public class Alarm {
 	String day = "";
 	String hour = "";
 	String minute = "";
+	String message = "";
 	boolean timer=false;
 	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 	
@@ -51,13 +52,14 @@ public class Alarm {
 	 * @param hour
 	 * @param minute
 	 */
-	public void setAlarm(String yr, String mon, String dy, String hr, String min){
+	public void setAlarm(String yr, String mon, String dy, String hr, String min, String message){
 		this.year=yr;
 		this.month=mon;
 		this.day=dy;
 		this.hour=hr;
 		this.minute=min;
 		this.timer=false;
+		this.message=message;
 	}
 	
 	/**
@@ -66,7 +68,7 @@ public class Alarm {
 	 * @param minute
 	 * @param timer
 	 */
-	public void setTimer(String min, boolean timer){
+	public void setTimer(String min, boolean timer, String message){
 		Calendar cal = Calendar.getInstance();
 		String currentTimeTemp=sdf.format(cal.getTime());
 		this.year=currentTimeTemp.substring(6, 10);
@@ -74,6 +76,7 @@ public class Alarm {
 		this.day=currentTimeTemp.substring(3, 5);
 		this.hour=currentTimeTemp.substring(11, 13);
 		this.minute=currentTimeTemp.substring(14);
+		this.message=message;
 		timer=true;
 		
 		//if minutes for timer entered plus current minutes goes over an hour, add to hour object so all variables have possible
@@ -118,8 +121,15 @@ public class Alarm {
 			x.setYear1(splice[2]);
 			x.setHour1(splice[3]);
 			x.setMinute1(splice[4]);
+			x.setMessage1(splice[5]);
 			
-			alarmTemp.setAlarm(x.year, x.month, x.day, x.hour, x.minute);
+			if(x.message==null){
+				alarmTemp.setAlarm(x.year, x.month, x.day, x.hour, x.minute, "");
+			}
+			else{
+				alarmTemp.setAlarm(x.year, x.month, x.day, x.hour, x.minute, x.message);
+			}
+			
 			GUIHelper.alarmLinkedList.add(alarmTemp);
 			
 			counter++;
@@ -165,6 +175,13 @@ public class Alarm {
         	sb.append(alarmLL.get(i).hour);
         	sb.append(',');
         	sb.append(alarmLL.get(i).minute);
+        	sb.append(",");
+        	if(alarmLL.get(i).message==""){
+        		sb.append("null");
+        	}
+        	else{
+        		sb.append(alarmLL.get(i).message);
+        	}
 	        sb.append('\n');
 		}
 		
@@ -204,7 +221,7 @@ public class Alarm {
 		else{
 			sb.append("Alarm for ");
 		}
-		sb.append(month+"/"+day+"/"+year+" "+hour+":"+minute+"\n");
+		sb.append(month+"/"+day+"/"+year+" "+hour+":"+minute+" \""+message+"\"");
 		
 		return sb.toString();
 	}

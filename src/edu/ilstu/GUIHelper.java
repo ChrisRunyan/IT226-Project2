@@ -26,7 +26,7 @@ public class GUIHelper extends JFrame {
 	JPanel setTimer = new JPanel();
 	JPanel delete = new JPanel();
 
-	JTextField f1, f2, f3, f4, f5, f6;
+	JTextField f1, f2, f3, f4, f5, f6, fm;
 
 	JFrame alarmFrame = new JFrame();
 	JFrame timerFrame = new JFrame();
@@ -91,6 +91,14 @@ public class GUIHelper extends JFrame {
 			f5.setPreferredSize(nd);
 			setAlarm2.add(f5);
 			f5.addKeyListener(new KeyActionListener());
+			
+			JLabel lm=new JLabel("Message (optional)");
+			setAlarm2.add(lm);
+					
+			fm = new JTextField();
+			fm.setPreferredSize(nd);
+			setAlarm2.add(fm);
+			fm.addKeyListener(new KeyActionListener());
 
 			alarmButton.setText("Save Alarm");
 			setAlarm2.add(alarmButton);
@@ -110,11 +118,19 @@ public class GUIHelper extends JFrame {
 			JLabel l1 = new JLabel();
 			setTimer.add(l1);
 			l1.setText("Enter time (minutes):");
+			
 			f6 = new JTextField("");
 			f6.setPreferredSize(nd);
 			setTimer.add(f6);
-
 			f6.addKeyListener(new KeyActionListener());
+			
+			JLabel lm=new JLabel("Message (optional)");
+			setTimer.add(lm);
+					
+			fm = new JTextField();
+			fm.setPreferredSize(nd);
+			setTimer.add(fm);
+			fm.addKeyListener(new KeyActionListener());
 
 			timerButton.setText("Set Timer");
 			setTimer.add(timerButton);
@@ -138,7 +154,7 @@ public class GUIHelper extends JFrame {
 				arrayOfAlarms[i] = new JButton();
 				arrayOfAlarms[i].setPreferredSize(new Dimension(250, 50));
 
-				arrayOfAlarms[i].setText("Delete "+GUIHelper.alarmLinkedList.get(i).toString());
+				arrayOfAlarms[i].setText("Delete "+GUIHelper.alarmLinkedList.get(i).dateToString()+"  \""+GUIHelper.alarmLinkedList.get(i).message+"\"");
 
 				delete.add(arrayOfAlarms[i]);
 
@@ -150,69 +166,37 @@ public class GUIHelper extends JFrame {
 	}
 	
 	class KeyActionListener implements KeyListener, ActionListener {
-
-		// String year, month, day, hour, minute = "";
-		String minute = "hi";
-
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-				if (e.getSource().equals(f1)) {
-
-					di.resetYear();
-					f1.setText("");
-
-				} else if (e.getSource().equals(f2)) {
-
-					di.resetMonth();
-					f2.setText("");
-
-				} else if (e.getSource().equals(f3)) {
-
-					di.resetDay();
-					f3.setText("");
-
-				} else if (e.getSource().equals(f4)) {
-
-					di.resetHour();
-					f4.setText("");
-
-				} else if (e.getSource().equals(f5)) {
-
-					di.resetMinute();
-					f5.setText("");
-
-				} else if (e.getSource().equals(f6)) {
-
-					di.resetTimer();
-					f6.setText("");
-				}
-			}
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
 		}
 
 		public void keyTyped(KeyEvent e) {
-			if (e.getSource().equals(f1)) {
-				di.setYear(e.getKeyChar());
-
-			} else if (e.getSource().equals(f2)) {
-				di.setMonth(e.getKeyChar());
-
-			} else if (e.getSource().equals(f3)) {
-				di.setDay(e.getKeyChar());
-
-			} else if (e.getSource().equals(f4)) {
-				di.setHour(e.getKeyChar());
-
-			} else if (e.getSource().equals(f5)) {
-				di.setMinute(e.getKeyChar());
-
-			} else if (e.getSource().equals(f6)) {
-				di.setTimerInMinutes(e.getKeyChar());
+			if (e.getKeyCode() != KeyEvent.VK_BACK_SPACE) {
+				if (e.getSource().equals(f1)) {
+					di.setYear(e.getKeyChar());
+	
+				} else if (e.getSource().equals(f2)) {
+					di.setMonth(e.getKeyChar());
+	
+				} else if (e.getSource().equals(f3)) {
+					di.setDay(e.getKeyChar());
+	
+				} else if (e.getSource().equals(f4)) {
+					di.setHour(e.getKeyChar());
+	
+				} else if (e.getSource().equals(f5)) {
+					di.setMinute(e.getKeyChar());
+	
+				} else if (e.getSource().equals(f6)) {
+					di.setTimerInMinutes(e.getKeyChar());
+				
+				} else if (e.getSource().equals(fm)) {
+					di.setMessage(e.getKeyChar());
+				}
 			}
 		}
 
@@ -273,10 +257,17 @@ public class GUIHelper extends JFrame {
 					}
 				}
 				if(validInput){
-					alarm.setAlarm(di.year, di.month, di.day, di.hour, di.minute);
+					alarm.setAlarm(di.year, di.month, di.day, di.hour, di.minute, di.message);
 					alarmLinkedList.add(alarm);
 					alarm.saveData(GUIHelper.alarmLinkedList);
 					alarm.scheduleAlarm();
+					StringBuilder sbAlarms=new StringBuilder();
+					sbAlarms.append("Current Alarms:\n");
+					for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
+						GUIHelper.alarmLinkedList.get(i).scheduleAlarm();
+						sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
+						GUI.showAlarms.setText(sbAlarms.toString());
+					}
 				}
 				dispose();
 			}
@@ -294,19 +285,35 @@ public class GUIHelper extends JFrame {
 					}
 				}
 				if(validInput){
-					alarm.setTimer(di.timer, true);
+					alarm.setTimer(di.timer, true, di.message);
 					alarmLinkedList.add(alarm);
 					alarm.saveData(GUIHelper.alarmLinkedList);
 					alarm.scheduleAlarm();
+					StringBuilder sbAlarms=new StringBuilder();
+					sbAlarms.append("Current Alarms:\n");
+					for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
+						GUIHelper.alarmLinkedList.get(i).scheduleAlarm();
+						sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
+						GUI.showAlarms.setText(sbAlarms.toString());
+					}
 				}
 				dispose();
 			}
 			for (int i = 0; i < GUIHelper.alarmLinkedList.size(); i++) {
-				String s = "Delete " + GUIHelper.alarmLinkedList.get(i).toString();
+				String s = "Delete "+GUIHelper.alarmLinkedList.get(i).dateToString()+"  \""+GUIHelper.alarmLinkedList.get(i).message+"\"";
 
 				if (s.equals(event.getActionCommand())) {
 					GUIHelper.alarmLinkedList.remove(i);
 					alarm.saveData(GUIHelper.alarmLinkedList);
+					StringBuilder sbAlarms=new StringBuilder();
+					sbAlarms.append("Current Alarms:\n");
+					for(int j=0; j<GUIHelper.alarmLinkedList.size(); j++){
+						sbAlarms.append(GUIHelper.alarmLinkedList.get(j).toString()+"\n");
+						GUI.showAlarms.setText(sbAlarms.toString());
+					}
+					if(GUIHelper.alarmLinkedList.size()==0){
+						GUI.showAlarms.setText(sbAlarms.toString());
+					}
 					dispose();
 				}
 			}
