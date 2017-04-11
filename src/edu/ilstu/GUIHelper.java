@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,10 +37,15 @@ public class GUIHelper extends JFrame {
 	JButton timerButton = new JButton();
 
 	Dimension nd = new Dimension(100, 25);
+	
+	static LinkedList<Alarm> alarmLinkedList=new LinkedList<Alarm>();
+	
+	ShowClock clock=new ShowClock();
 
 	public GUIHelper(int promptNum) {
 		if (promptNum == 1) {
-			alarmFrame.getContentPane().add(setAlarm);
+			JPanel finalPanel=new JPanel();
+			JPanel clockPanel=new JPanel();
 
 			f1 = new JTextField("Year (yyyy)");
 			f1.setPreferredSize(nd);
@@ -69,11 +76,16 @@ public class GUIHelper extends JFrame {
 			setAlarm.add(alarmButton);
 			alarmButton.addActionListener(new KeyActionListener());
 
-			getContentPane().add(setAlarm);
+			finalPanel.add(clock.showClock(clockPanel));
+			finalPanel.add(setAlarm);
+			finalPanel.add(setAlarm);
+			
+			add(finalPanel);
 			//**Set alarm
 		}
 		if (promptNum == 2) {
-			timerFrame.getContentPane().add(setTimer);
+			JPanel finalPanel=new JPanel();
+			JPanel clockPanel=new JPanel();
 
 			JLabel l1 = new JLabel();
 			setTimer.add(l1);
@@ -88,7 +100,10 @@ public class GUIHelper extends JFrame {
 			setTimer.add(timerButton);
 			timerButton.addActionListener(new KeyActionListener());
 
-			getContentPane().add(setTimer);
+			finalPanel.add(clock.showClock(clockPanel));
+			finalPanel.add(setTimer);
+			
+			add(finalPanel);
 			//**Set timer
 		}
 		if (promptNum == 3) {
@@ -117,7 +132,7 @@ public class GUIHelper extends JFrame {
 
 				getContentPane().add(delete);
 			}
-			//**Delete alarm associated with i
+			//**Delete alarm associated with i and close
 		}
 	}
 	
@@ -191,13 +206,19 @@ public class GUIHelper extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getActionCommand() == "Save Alarm") {
+				Alarm alarm=new Alarm();
+				alarm.setAlarm(di.day, di.month, di.day, di.hour, di.minute);
+				alarmLinkedList.add(alarm);
 				System.out.println(di.dateToString());
+				dispose();
 			}
 			if (event.getActionCommand() == "Set Timer") {
 				System.out.println(di.timerToString());
+				dispose();
 			}
 			if (event.getActionCommand() == "Delete") {
 				System.out.println("DELETE");
+				dispose();
 			}
 
 			/*

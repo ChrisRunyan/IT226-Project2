@@ -31,11 +31,9 @@ public class GUI extends JFrame {
 	GUIHelper addTimerGUI = new GUIHelper(2);
 	GUIHelper deleteGUI = new GUIHelper(3);
 	
-	ShowClock clock=new ShowClock();
-	
 	public GUI() {
 		//what is added to the JFrame
-		finalPanel.setLayout(new GridLayout(3, 1, 5, 5));
+		finalPanel.setLayout(new GridLayout(2, 1, 5, 5));
 		
 		//two panels that go into finalPanel
 		middlePanel.setLayout(new GridLayout(1, 3, 5, 5));
@@ -58,14 +56,24 @@ public class GUI extends JFrame {
 		showAlarms.setText("Current Alarms:\n");
 		bottomPanel.add(showAlarms);
 		showAlarms.setEditable(false);
+		for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
+			if(GUIHelper.alarmLinkedList.get(i).timer==false){
+				showAlarms.setText(GUIHelper.alarmLinkedList.get(i).toString());
+			}
+		}
 //		showAlarms.setFont(getFont().deriveFont(4.0f));
 		
 		showTimers.setText("Current Timers:\n");
 		bottomPanel.add(showTimers);
 		showTimers.setEditable(false);
+		for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
+			if(GUIHelper.alarmLinkedList.get(i).timer==true){
+				showAlarms.setText(GUIHelper.alarmLinkedList.get(i).toString());
+			}
+		}
 //		showTimers.setFont(getFont().deriveFont(4.0f));
 		
-		finalPanel.add(clock.showClock(topPanel));
+//		finalPanel.add(clock.showClock(topPanel));
 		finalPanel.add(middlePanel);
 		finalPanel.add(bottomPanel);
 		add(finalPanel);
@@ -77,13 +85,13 @@ public class GUI extends JFrame {
 			if (event.getActionCommand() == "Add an Alarm") {
 				addAlarmGUI.setTitle("Add an Alarm");
 				addAlarmGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				addAlarmGUI.setSize(150, 300);
+				addAlarmGUI.setSize(700, 200);
 				addAlarmGUI.setVisible(true);
 			}
 			if (event.getActionCommand() == "Add a Timer") {
 				addTimerGUI.setTitle("Add a Timer");
 				addTimerGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				addTimerGUI.setSize(150, 300);
+				addTimerGUI.setSize(400, 200);
 				addTimerGUI.setVisible(true);
 			}
 			if (event.getActionCommand() == "Delete a Timer/Alarm") {

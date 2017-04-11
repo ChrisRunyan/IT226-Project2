@@ -11,30 +11,68 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Alarm {
-	public LinkedList<DataInput> input = new LinkedList<DataInput>();
 	public String currentTime;
+	String year = "";
+	String month = "";
+	String day = "";
+	String hour = "";
+	String minute = "";
+	boolean timer=false;
 	
 	//get current time 
-	public String gettime(){
+	public String getCurrentTime(){
 		Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         currentTime = sdf.format(cal.getTime());
         return currentTime;
 	}
 	
-	// set an alarm 
-	public void setAlarm(String year, String month,String day, String hours, String min,LinkedList<DataInput> data ){
-		DataInput a = new DataInput();
-		a.setDay1(day);
-		a.setHour1(hours);
-		a.setMinute1(min);
-		a.setYear1(year);
-		a.setMonth1(month);
-		data.add(a);
+	/**
+	 * Gathers all variables required for an alarm object 
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param hour
+	 * @param minute
+	 */
+	public void setAlarm(String yr, String mon, String dy, String hr, String min){
+		this.year=yr;
+		this.month=mon;
+		this.day=dy;
+		this.hour=hr;
+		this.minute=min;
+		this.timer=false;
+	}
+	
+	/**
+	 * Gathers all variables required for a timer object; takes minutes and adds to current time to create alarm object
+	 * 
+	 * @param minute
+	 * @param timer
+	 */
+	public void setTimer(String min, boolean timer){
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+		String currentTimeTemp=sdf.format(cal.getTime());
+		this.year=currentTimeTemp.substring(7, 11);
+		this.month=currentTimeTemp.substring(0, 2);
+		this.day=currentTimeTemp.substring(3, 5);
+		this.hour=currentTimeTemp.substring(11, 13);
+		this.minute=currentTimeTemp.substring(14);
+		timer=true;
+		
+		//if minutes for timer entered plus current minutes goes over an hour, add to hour object so all variables have possible
+		//values for a time (i.e. minutes < 60, hour < 24, etc.
+		if(Integer.parseInt(minute)+Integer.parseInt(min)>60){
+			//if hours greater than 24 now, add 1 to day...so on 
+			this.hour=Integer.toString((Integer.parseInt(this.hour)+1));
+			this.minute=Integer.toString((Integer.parseInt(minute)+Integer.parseInt(min)%60));
+		}
 	}
 	
 	//read data from csv file and then put them to dataInput data
-	public void readData(LinkedList<DataInput> data)throws FileNotFoundException{
+	public void readData()throws FileNotFoundException{
 		Scanner reader = null;
 		
 	    try{
@@ -49,15 +87,20 @@ public class Alarm {
 	    int counter = 0;
 	    
 	    while(reader.hasNextLine()){
+	    	Alarm alarmTemp=new Alarm();
 	    	lines.add(reader.nextLine());
 	    	String[] splice = lines.get(counter).split(",");
 			DataInput x = new DataInput();
+			
 			x.setMonth1(splice[0]);
 			x.setDay1(splice[1]);
 			x.setYear1(splice[2]);
 			x.setHour1(splice[3]);
 			x.setMinute1(splice[4]);
-			data.add(x);
+			
+			alarmTemp.setAlarm(x.year, x.month, x.day, x.hour, x.minute);
+			GUIHelper.alarmLinkedList.add(alarmTemp);
+			
 			counter++;
 	    }
 	    
@@ -129,5 +172,19 @@ public class Alarm {
 		}
 		
 		data.remove(index);
+	}
+	
+	public String toString(){
+		StringBuilder sb=new StringBuilder();
+		
+		if(timer==true){
+			sb.append("Timer for ");
+		}
+		else{
+			sb.append("Alarm for ");
+		}
+		sb.append(month+"/"+day+"/"+year+" "+hour+":"+minute+"\n");
+		
+		return sb.toString();
 	}
 }
