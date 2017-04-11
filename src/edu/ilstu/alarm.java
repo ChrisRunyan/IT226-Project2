@@ -55,7 +55,7 @@ public class Alarm {
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		String currentTimeTemp=sdf.format(cal.getTime());
-		this.year=currentTimeTemp.substring(7, 11);
+		this.year=currentTimeTemp.substring(6, 10);
 		this.month=currentTimeTemp.substring(0, 2);
 		this.day=currentTimeTemp.substring(3, 5);
 		this.hour=currentTimeTemp.substring(11, 13);
@@ -65,9 +65,16 @@ public class Alarm {
 		//if minutes for timer entered plus current minutes goes over an hour, add to hour object so all variables have possible
 		//values for a time (i.e. minutes < 60, hour < 24, etc.
 		if(Integer.parseInt(minute)+Integer.parseInt(min)>60){
-			//if hours greater than 24 now, add 1 to day...so on 
+			this.minute=Integer.toString(((Integer.parseInt(minute)+Integer.parseInt(min))%60));
 			this.hour=Integer.toString((Integer.parseInt(this.hour)+1));
-			this.minute=Integer.toString((Integer.parseInt(minute)+Integer.parseInt(min)%60));
+			if(Integer.parseInt(hour)>24){
+				this.hour=Integer.toString((Integer.parseInt(this.hour)%60));
+				this.day=Integer.toString((Integer.parseInt(this.day)+1));
+			}
+			//**check if days is over 30 or 31 depending on month
+		}
+		else{
+			this.minute=Integer.toString(Integer.parseInt(minute)+Integer.parseInt(min));
 		}
 	}
 	
@@ -80,7 +87,7 @@ public class Alarm {
 		}
 		catch(FileNotFoundException e1){
 			//**Print to showAlarms and showTimers that file could not be read
-//			System.out.println("Invalid filename entered. Try again.");
+			System.out.println("Invalid filename entered. Try again.");
 		}
 	        
 	    LinkedList<String> lines= new LinkedList<String>();
@@ -122,7 +129,7 @@ public class Alarm {
 	}
 
 	// save data from linkedlist to csv file, use the datainput linkedlist 
-	public void saveData(LinkedList<DataInput> data){
+	public void saveData(LinkedList<Alarm> alarmLL){
 		PrintWriter writer = null;
 		
 		try{
@@ -134,16 +141,16 @@ public class Alarm {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		for(int i = 0; i< data.size() ; i++){
-        	sb.append(data.get(i).month);
+		for(int i = 0; i< alarmLL.size() ; i++){
+        	sb.append(alarmLL.get(i).month);
         	sb.append(',');
-        	sb.append(data.get(i).day);
+        	sb.append(alarmLL.get(i).day);
         	sb.append(',');
-        	sb.append(data.get(i).year);
+        	sb.append(alarmLL.get(i).year);
         	sb.append(',');
-        	sb.append(data.get(i).hour);
+        	sb.append(alarmLL.get(i).hour);
         	sb.append(',');
-        	sb.append(data.get(i).minute);
+        	sb.append(alarmLL.get(i).minute);
 	        sb.append('\n');
 		}
 		

@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -21,7 +21,8 @@ import javax.swing.JTextField;
 public class GUIHelper extends JFrame {
 	DataInput di = new DataInput();
 
-	JPanel setAlarm = new JPanel();
+	JPanel setAlarm1 = new JPanel();
+	JPanel setAlarm2 = new JPanel();
 	JPanel setTimer = new JPanel();
 	JPanel delete = new JPanel();
 
@@ -41,44 +42,63 @@ public class GUIHelper extends JFrame {
 	static LinkedList<Alarm> alarmLinkedList=new LinkedList<Alarm>();
 	
 	ShowClock clock=new ShowClock();
+	
+	Alarm alarm=new Alarm();
+	
+	Boolean validInput=true;
 
 	public GUIHelper(int promptNum) {
 		if (promptNum == 1) {
 			JPanel finalPanel=new JPanel();
 			JPanel clockPanel=new JPanel();
 
-			f1 = new JTextField("Year (yyyy)");
+			JLabel l1=new JLabel("Year (yyyy)");
+			setAlarm1.add(l1);
+			
+			f1 = new JTextField();
 			f1.setPreferredSize(nd);
-			setAlarm.add(f1);
+			setAlarm1.add(f1);
 			f1.addKeyListener(new KeyActionListener());
 
-			f2 = new JTextField("Month (mm)");
+			JLabel l2=new JLabel("Month (mm)");
+			setAlarm1.add(l2);
+			
+			f2 = new JTextField();
 			f2.setPreferredSize(nd);
-			setAlarm.add(f2);
+			setAlarm1.add(f2);
 			f2.addKeyListener(new KeyActionListener());
 
-			f3 = new JTextField("Day (dd)");
+			JLabel l3=new JLabel("Day (dd)");
+			setAlarm1.add(l3);
+			
+			f3 = new JTextField();
 			f3.setPreferredSize(nd);
-			setAlarm.add(f3);
+			setAlarm1.add(f3);
 			f3.addKeyListener(new KeyActionListener());
 
-			f4 = new JTextField("Hour (24)");
+			JLabel l4=new JLabel("Hour (24)");
+			setAlarm2.add(l4);
+			
+			f4 = new JTextField();
 			f4.setPreferredSize(nd);
-			setAlarm.add(f4);
+			setAlarm2.add(f4);
 			f4.addKeyListener(new KeyActionListener());
 
-			f5 = new JTextField("Minute (60)");
+			JLabel l5=new JLabel("Minute (60)");
+			setAlarm2.add(l5);
+			
+			f5 = new JTextField();
 			f5.setPreferredSize(nd);
-			setAlarm.add(f5);
+			setAlarm2.add(f5);
 			f5.addKeyListener(new KeyActionListener());
 
 			alarmButton.setText("Save Alarm");
-			setAlarm.add(alarmButton);
+			setAlarm2.add(alarmButton);
 			alarmButton.addActionListener(new KeyActionListener());
 
 			finalPanel.add(clock.showClock(clockPanel));
-			finalPanel.add(setAlarm);
-			finalPanel.add(setAlarm);
+			finalPanel.add(setAlarm1);
+			finalPanel.add(setAlarm2);
 			
 			add(finalPanel);
 			//**Set alarm
@@ -108,31 +128,24 @@ public class GUIHelper extends JFrame {
 		}
 		if (promptNum == 3) {
 			deleteFrame.getContentPane().add(delete);
+			JPanel clockPanel=new JPanel();
 
-			arrayOfAlarms = new JButton[10];
+			arrayOfAlarms = new JButton[GUIHelper.alarmLinkedList.size()];
 
-			/*
-			 * 
-			 * 
-			 * for "i < 5" , the 5 should be changed to the amount of alarms and
-			 * timers we have.
-			 * 
-			 * for "LINKED LIST" it should print out a list of the
-			 * alarms/timers.
-			 * 
-			 */
-			for (int i = 0; i < 5; i++) {
+			delete.add(clock.showClock(clockPanel));
+			
+			for (int i = 0; i < GUIHelper.alarmLinkedList.size(); i++) {
 				arrayOfAlarms[i] = new JButton();
+				arrayOfAlarms[i].setPreferredSize(new Dimension(250, 50));
 
-				arrayOfAlarms[i].setText("Alarm " + (i + 1) + " - " + "LINKED LIST");
+				arrayOfAlarms[i].setText("Delete "+GUIHelper.alarmLinkedList.get(i).toString());
 
 				delete.add(arrayOfAlarms[i]);
 
 				arrayOfAlarms[i].addActionListener(new KeyActionListener());
 
-				getContentPane().add(delete);
+				add(delete);
 			}
-			//**Delete alarm associated with i and close
 		}
 	}
 	
@@ -206,36 +219,93 @@ public class GUIHelper extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getActionCommand() == "Save Alarm") {
-				Alarm alarm=new Alarm();
-				alarm.setAlarm(di.day, di.month, di.day, di.hour, di.minute);
-				alarmLinkedList.add(alarm);
-				System.out.println(di.dateToString());
+				if(di.year.equals("")){
+					JFrame frame=new JFrame();
+					JOptionPane.showMessageDialog(frame, "You must enter a year.");
+					validInput=false;
+				}
+				if(di.month.equals("")){
+					JFrame frame=new JFrame();
+					JOptionPane.showMessageDialog(frame, "You must enter a month.");
+					validInput=false;
+				}
+				if(di.day.equals("")){
+					JFrame frame=new JFrame();
+					JOptionPane.showMessageDialog(frame, "You must enter a day.");
+					validInput=false;
+				}
+				if(di.hour.equals("")){
+					JFrame frame=new JFrame();
+					JOptionPane.showMessageDialog(frame, "You must enter an hour.");
+					validInput=false;
+				}
+				if(di.minute.equals("")){
+					JFrame frame=new JFrame();
+					JOptionPane.showMessageDialog(frame, "You must enter a minute.");
+					validInput=false;
+				}
+				if(!di.month.equals("")){
+					if(Integer.parseInt(di.month)>12){
+						JFrame frame=new JFrame();
+						JOptionPane.showMessageDialog(frame, "Month not possible.");
+						validInput=false;
+					}
+				}
+				if(!di.day.equals("")){
+					if(Integer.parseInt(di.day)>31){
+						JFrame frame=new JFrame();
+						JOptionPane.showMessageDialog(frame, "Day not possible.");
+						validInput=false;
+					}
+				}
+				if(!di.hour.equals("")){
+					if(Integer.parseInt(di.hour)>24){
+						JFrame frame=new JFrame();
+						JOptionPane.showMessageDialog(frame, "Hour not possible.");
+						validInput=false;
+					}
+				}
+				if(!di.minute.equals("")){
+					if(Integer.parseInt(di.minute)>59){
+						JFrame frame=new JFrame();
+						JOptionPane.showMessageDialog(frame, "Minute not possible.");
+						validInput=false;
+					}
+				}
+				if(validInput){
+					alarm.setAlarm(di.year, di.month, di.day, di.hour, di.minute);
+					alarmLinkedList.add(alarm);
+					alarm.saveData(GUIHelper.alarmLinkedList);
+				}
 				dispose();
 			}
 			if (event.getActionCommand() == "Set Timer") {
-				System.out.println(di.timerToString());
+				if(di.timer.equals("")){
+					JFrame frame=new JFrame();
+					JOptionPane.showMessageDialog(frame, "You must enter a number.");
+					validInput=false;
+				}
+				if(!di.timer.equals("")){
+					if(Integer.parseInt(di.timer)>300){
+						JFrame frame=new JFrame();
+						JOptionPane.showMessageDialog(frame, "Maximum number of minutes allowed is 300.");
+						validInput=false;
+					}
+				}
+				if(validInput){
+					alarm.setTimer(di.timer, true);
+					alarmLinkedList.add(alarm);
+					alarm.saveData(GUIHelper.alarmLinkedList);
+				}
 				dispose();
 			}
-			if (event.getActionCommand() == "Delete") {
-				System.out.println("DELETE");
-				dispose();
-			}
-
-			/*
-			 * for "i < 6" , 6 should be the length of the linked list of alarms
-			 * and timers + 1
-			 */
-			for (int i = 0; i < 6; i++) {
-				String s = "Alarm " + (i + 1) + " - " + "LINKED LIST";
+			for (int i = 0; i < GUIHelper.alarmLinkedList.size(); i++) {
+				String s = "Delete " + GUIHelper.alarmLinkedList.get(i).toString();
 
 				if (s.equals(event.getActionCommand())) {
-					System.out.println("Delete Timer " + (i + 1));
-
-					/*
-					 * 
-					 * CODE TO DELETE ALARM/TIMER FROM LINKED LIST
-					 * 
-					 */
+					GUIHelper.alarmLinkedList.remove(i);
+					alarm.saveData(GUIHelper.alarmLinkedList);
+					dispose();
 				}
 			}
 		}

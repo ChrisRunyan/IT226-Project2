@@ -27,9 +27,9 @@ public class GUI extends JFrame {
 	static JTextArea showAlarms=new JTextArea();
 	static JTextArea showTimers=new JTextArea();
 	
-	GUIHelper addAlarmGUI = new GUIHelper(1);
-	GUIHelper addTimerGUI = new GUIHelper(2);
-	GUIHelper deleteGUI = new GUIHelper(3);
+	
+	
+	
 	
 	public GUI() {
 		//what is added to the JFrame
@@ -83,21 +83,30 @@ public class GUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			if (event.getActionCommand() == "Add an Alarm") {
+				GUIHelper addAlarmGUI = new GUIHelper(1);
 				addAlarmGUI.setTitle("Add an Alarm");
 				addAlarmGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				addAlarmGUI.setSize(700, 200);
+				addAlarmGUI.setSize(700, 225);
 				addAlarmGUI.setVisible(true);
 			}
 			if (event.getActionCommand() == "Add a Timer") {
+				GUIHelper addTimerGUI = new GUIHelper(2);
 				addTimerGUI.setTitle("Add a Timer");
 				addTimerGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				addTimerGUI.setSize(400, 200);
 				addTimerGUI.setVisible(true);
 			}
 			if (event.getActionCommand() == "Delete a Timer/Alarm") {
+				double size=(double)GUIHelper.alarmLinkedList.size()/2;
+				
+				if(size%0.5==0){
+					size+=0.5;
+				}
+				
+				GUIHelper deleteGUI = new GUIHelper(3);
 				deleteGUI.setTitle("Delete");
 				deleteGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				deleteGUI.setSize(150, 300);
+				deleteGUI.setSize(600, (125+(70*(int)size)));
 				deleteGUI.setVisible(true);
 			}
 		}
