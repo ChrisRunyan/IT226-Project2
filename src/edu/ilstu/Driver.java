@@ -14,6 +14,9 @@ public class Driver {
 				
 		try {
 			alarm.readData();
+			for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
+				alarm.scheduleAlarm();
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -21,7 +24,6 @@ public class Driver {
 		newGUI.setTitle("Alarm");
 		newGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		newGUI.setSize(640, 360);
-//		newGUI.setSize(650, 400);
 		newGUI.setVisible(true);
 		newGUI.setResizable(false);
 	}

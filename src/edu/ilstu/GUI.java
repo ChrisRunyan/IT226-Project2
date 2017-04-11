@@ -61,7 +61,6 @@ public class GUI extends JFrame {
 				showAlarms.setText(GUIHelper.alarmLinkedList.get(i).toString());
 			}
 		}
-//		showAlarms.setFont(getFont().deriveFont(4.0f));
 		
 		showTimers.setText("Current Timers:\n");
 		bottomPanel.add(showTimers);
@@ -71,9 +70,7 @@ public class GUI extends JFrame {
 				showAlarms.setText(GUIHelper.alarmLinkedList.get(i).toString());
 			}
 		}
-//		showTimers.setFont(getFont().deriveFont(4.0f));
 		
-//		finalPanel.add(clock.showClock(topPanel));
 		finalPanel.add(middlePanel);
 		finalPanel.add(bottomPanel);
 		add(finalPanel);
@@ -88,13 +85,15 @@ public class GUI extends JFrame {
 				addAlarmGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				addAlarmGUI.setSize(700, 225);
 				addAlarmGUI.setVisible(true);
+				addAlarmGUI.setResizable(false);
 			}
 			if (event.getActionCommand() == "Add a Timer") {
 				GUIHelper addTimerGUI = new GUIHelper(2);
 				addTimerGUI.setTitle("Add a Timer");
 				addTimerGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				addTimerGUI.setSize(400, 200);
+				addTimerGUI.setSize(400, 175);
 				addTimerGUI.setVisible(true);
+				addTimerGUI.setResizable(false);
 			}
 			if (event.getActionCommand() == "Delete a Timer/Alarm") {
 				double size=(double)GUIHelper.alarmLinkedList.size()/2;
@@ -106,8 +105,9 @@ public class GUI extends JFrame {
 				GUIHelper deleteGUI = new GUIHelper(3);
 				deleteGUI.setTitle("Delete");
 				deleteGUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				deleteGUI.setSize(600, (125+(70*(int)size)));
+				deleteGUI.setSize(550, (125+(70*(int)size)));
 				deleteGUI.setVisible(true);
+				deleteGUI.setResizable(false);
 			}
 		}
 	}

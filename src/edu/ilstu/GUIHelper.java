@@ -276,6 +276,7 @@ public class GUIHelper extends JFrame {
 					alarm.setAlarm(di.year, di.month, di.day, di.hour, di.minute);
 					alarmLinkedList.add(alarm);
 					alarm.saveData(GUIHelper.alarmLinkedList);
+					alarm.scheduleAlarm();
 				}
 				dispose();
 			}
@@ -296,6 +297,7 @@ public class GUIHelper extends JFrame {
 					alarm.setTimer(di.timer, true);
 					alarmLinkedList.add(alarm);
 					alarm.saveData(GUIHelper.alarmLinkedList);
+					alarm.scheduleAlarm();
 				}
 				dispose();
 			}

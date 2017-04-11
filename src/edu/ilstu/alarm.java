@@ -7,6 +7,10 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -18,6 +22,7 @@ public class Alarm {
 	String hour = "";
 	String minute = "";
 	boolean timer=false;
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 	
 	//get current time 
 	public String getCurrentTime(){
@@ -25,6 +30,16 @@ public class Alarm {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         currentTime = sdf.format(cal.getTime());
         return currentTime;
+	}
+	
+	public void scheduleAlarm(){
+		Timer timer=new Timer();
+		try {
+			Date date=sdf.parse(month+"/"+day+"/"+year+" "+hour+":"+minute);
+			timer.schedule(new MyTimeTask(), date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -53,7 +68,6 @@ public class Alarm {
 	 */
 	public void setTimer(String min, boolean timer){
 		Calendar cal = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
 		String currentTimeTemp=sdf.format(cal.getTime());
 		this.year=currentTimeTemp.substring(6, 10);
 		this.month=currentTimeTemp.substring(0, 2);
@@ -159,7 +173,7 @@ public class Alarm {
 	}
 	
 	//return true if get right time ( can use it to get notification ) 
-	public boolean checkAlarm(DataInput a){
+	public boolean checkAlarm(Alarm a){
 		if(a.dateToString().equals(currentTime)){
 			return true;
 		}
@@ -194,4 +208,27 @@ public class Alarm {
 		
 		return sb.toString();
 	}
+	
+	public String dateToString() {
+		String tostring = "";
+
+		tostring += month;
+		tostring += "/";
+		tostring += day;
+		tostring += "/";
+		tostring += year;
+		tostring += " ";
+		tostring += hour;
+		tostring += ":";
+		tostring += minute;
+
+		return tostring;
+	}
+	
+	private static class MyTimeTask extends TimerTask {
+	      public void run() {
+	    	  JFrame frame=new JFrame();
+	    	  JOptionPane.showMessageDialog(frame, "ALARM");
+	      }
+	   }
 }
