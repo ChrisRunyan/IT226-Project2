@@ -35,14 +35,17 @@ public class GUI extends JFrame {
 		
 		//for top panel
 		addAlarm.setText("Add an Alarm");
+		addAlarm.setFont(addAlarm.getFont().deriveFont(18f));
 		middlePanel.add(addAlarm);
 		addAlarm.addActionListener(new ActionListener1());
 
 		addTimer.setText("Add a Timer");
+		addTimer.setFont(addTimer.getFont().deriveFont(18f));
 		middlePanel.add(addTimer);
 		addTimer.addActionListener(new ActionListener1());
 
-		delete.setText("Delete a Timer/Alarm");
+		delete.setText("<html>Delete a Timer<br />or Alarm</html>");
+		delete.setFont(delete.getFont().deriveFont(18f));
 		middlePanel.add(delete);
 		delete.addActionListener(new ActionListener1());
 		
@@ -80,7 +83,7 @@ public class GUI extends JFrame {
 				addTimerGUI.setVisible(true);
 				addTimerGUI.setResizable(false);
 			}
-			if (event.getActionCommand() == "Delete a Timer/Alarm") {
+			if (event.getActionCommand() == "<html>Delete a Timer<br />or Alarm</html>") {
 				double size=(double)GUIHelper.alarmLinkedList.size()/2;
 				
 				if(size%0.5==0){

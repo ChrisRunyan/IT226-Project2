@@ -19,8 +19,9 @@ public class Driver {
 			for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
 				GUIHelper.alarmLinkedList.get(i).scheduleAlarm();
 				sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
-				GUI.showAlarms.setText(sbAlarms.toString());
 			}
+			GUI.showAlarms.setFont(GUI.showAlarms.getFont().deriveFont(16f));
+			GUI.showAlarms.setText(sbAlarms.toString());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}

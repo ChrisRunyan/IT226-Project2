@@ -1,5 +1,6 @@
 package edu.ilstu;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +21,7 @@ class MyTimeTask extends TimerTask {
 	JFrame frame=new JFrame();
 	  
 	JPanel topPanel=new JPanel();
+	JPanel middlePanel=new JPanel();
 	JPanel bottomPanel=new JPanel();
 	JPanel finalPanel=new JPanel();
 	JButton sleep=new JButton();
@@ -32,7 +34,7 @@ class MyTimeTask extends TimerTask {
 	}
 	
 	public void run() {
-		frame.setSize(300, 150);
+		frame.setSize(400, 250);
     	frame.setVisible(true);
     	  
     	if(alarm.message!=""&&alarm.message!=null){
@@ -42,17 +44,24 @@ class MyTimeTask extends TimerTask {
     		label.setText(alarm.toString());
     	}
     	  
+    	label.setFont(label.getFont().deriveFont(16f));
     	snoozedLabel.setText("(Snoozed "+alarm.returnSnoozed()+" times)");
+    	snoozedLabel.setFont(snoozedLabel.getFont().deriveFont(14f));
     	sleep.setText("Snooze");
+    	sleep.setSize(new Dimension(200, 50));
+    	sleep.setFont(sleep.getFont().deriveFont(14f));
     	dismiss.setText("Dismiss");
+    	dismiss.setSize(new Dimension(200, 50));
+    	dismiss.setFont(dismiss.getFont().deriveFont(14f));
     	sleep.addActionListener(new ActionListener1());
     	dismiss.addActionListener(new ActionListener1());
-    	finalPanel.setLayout(new GridLayout(2, 1, 5, 5));
+    	finalPanel.setLayout(new GridLayout(3, 1, 5, 5));
     	topPanel.add(label);
-    	topPanel.add(snoozedLabel);
+    	middlePanel.add(snoozedLabel);
     	bottomPanel.add(sleep);
     	bottomPanel.add(dismiss);
     	finalPanel.add(topPanel);
+    	finalPanel.add(middlePanel);
     	finalPanel.add(bottomPanel);
     	frame.setResizable(false);
     	frame.add(finalPanel);
@@ -64,7 +73,6 @@ class MyTimeTask extends TimerTask {
 			if (event.getActionCommand() == "Snooze") {
 				alarm.addToSnoozed();
     			alarmTemp.snoozed=alarm.returnSnoozed();
-    			System.out.println(alarmTemp.returnSnoozed());
     			alarmTemp.setTimer("1", true, alarm.message);
     			GUIHelper.alarmLinkedList.remove(alarm);
     			GUIHelper.alarmLinkedList.add(alarmTemp);
