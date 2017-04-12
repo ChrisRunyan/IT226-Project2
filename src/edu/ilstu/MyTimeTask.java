@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * Actual alarm; creates a GUI and plays an alarm when thrown by the Alarm class.
  * 
  * @author Christopher Runyan
  */
@@ -29,11 +30,19 @@ class MyTimeTask extends TimerTask {
 	JLabel label=new JLabel();
 	JLabel snoozedLabel=new JLabel();
 	
+	AlarmAudio playAlarm=new AlarmAudio();
+	
 	public MyTimeTask(Alarm a){
 		this.alarm=a;
 	}
 	
 	public void run() {
+		try {
+			playAlarm.setUpAlarm();
+			playAlarm.playAlarm();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		frame.setSize(400, 250);
     	frame.setVisible(true);
     	  
@@ -84,6 +93,7 @@ class MyTimeTask extends TimerTask {
 					sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
 				}
 				GUI.showAlarms.setText(sbAlarms.toString());
+				playAlarm.stopAlarm();
 				frame.dispose();
     			}
     			if (event.getActionCommand() == "Dismiss") {
@@ -95,6 +105,7 @@ class MyTimeTask extends TimerTask {
 						sbAlarms.append(GUIHelper.alarmLinkedList.get(j).toString()+"\n");
 					}
 					GUI.showAlarms.setText(sbAlarms.toString());
+					playAlarm.stopAlarm();
 					frame.dispose();
     			}	
 			}

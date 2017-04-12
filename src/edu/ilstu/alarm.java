@@ -12,6 +12,10 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
+ * Contains all data for the Alarm, including data held in DataInput class. In order for an alarm to go off, must call
+ * scheduleAlarm(). Reads data and saves data to .csv file. Also contains methods for adding a new alarm and timer, which
+ * contains less data than the alarm and all other variables are set to the current time (timer simply adds on minutes
+ * requested for the timer onto the current time and sets an alarm). 
  * 
  * @author Christopher Runyan, Hoang Le
  */

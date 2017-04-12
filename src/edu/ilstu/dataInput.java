@@ -1,6 +1,7 @@
 package edu.ilstu;
 
 /**
+ * Contains all variables needed during the importation of data and contains methods to implement them.
  * 
  * @author Christopher Runyan, Hoang Le
  */

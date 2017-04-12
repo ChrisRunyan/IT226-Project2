@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
+ * Sets up the GUI and contains functionality for it. Must implement GUIHelper.
+ * 
  * @author Kevin Haas, Christopher Runyan
  */
 @SuppressWarnings("serial")

@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Contains methods that GUI implements and contains some functionality of the GUI. Static linked list AlarmLinkedList
+ * contains the most recent list of all alarms.
+ * 
  * @author Kevin Haas, Christopher Runyan
  */
 @SuppressWarnings("serial")
