@@ -312,10 +312,9 @@ public class GUIHelper extends JFrame {
 					StringBuilder sbAlarms=new StringBuilder();
 					sbAlarms.append("Current Alarms:\n");
 					for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
-						GUIHelper.alarmLinkedList.get(i).scheduleAlarm();
 						sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
-						GUI.showAlarms.setText(sbAlarms.toString());
 					}
+					GUI.showAlarms.setText(sbAlarms.toString());
 				}
 				di.resetDay();
 				di.resetHour();
@@ -348,8 +347,8 @@ public class GUIHelper extends JFrame {
 					sbAlarms.append("Current Alarms:\n");
 					for(int i=0; i<GUIHelper.alarmLinkedList.size(); i++){
 						sbAlarms.append(GUIHelper.alarmLinkedList.get(i).toString()+"\n");
-						GUI.showAlarms.setText(sbAlarms.toString());
 					}
+					GUI.showAlarms.setText(sbAlarms.toString());
 				}
 				di.resetDay();
 				di.resetHour();
