@@ -1,5 +1,9 @@
 package edu.ilstu;
 
+/**
+ * 
+ * @author Christopher Runyan, Hoang Le
+ */
 public class DataInput {
 	String year = "";
 	String month = "";
@@ -59,6 +63,10 @@ public class DataInput {
 
 	public void setMessage1(String message){
 		this.message=message;
+	}
+	
+	public void setTimerInMinutes1(String timer){
+		this.timer=timer;
 	}
 	
 	public void resetYear() {

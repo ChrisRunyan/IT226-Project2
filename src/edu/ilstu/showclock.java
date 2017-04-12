@@ -27,18 +27,9 @@ public class ShowClock {
 		ClockLabel dayLable = new ClockLabel("day");
 		dayLable.setForeground(Color.BLACK);
 		
-//		JTextArea spacer1=new JTextArea();
-//		spacer1.setVisible(false);
-//		JTextArea spacer2=new JTextArea();
-//		spacer2.setVisible(false);
-		
-//		topPanel.add(spacer1);
-		
 		topPanel.add(dateLable);
 		topPanel.add(timeLable);
 		topPanel.add(dayLable);
-		
-//		topPanel.add(spacer2);
 	  
 		return topPanel;
   }
@@ -55,7 +46,7 @@ public class ShowClock {
 			    	setFont(new Font("sans-serif", Font.PLAIN, 12));
 			    	setHorizontalAlignment(SwingConstants.LEFT);
 			    	break;
-				case "time" : sdf = new SimpleDateFormat("hh:mm:ss ");
+				case "time" : sdf = new SimpleDateFormat("kk:mm:ss ");
 			        setFont(new Font("sans-serif", Font.PLAIN, 40));
 			        setHorizontalAlignment(SwingConstants.CENTER);
 			        break;

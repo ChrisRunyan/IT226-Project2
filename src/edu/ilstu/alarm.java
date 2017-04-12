@@ -7,13 +7,14 @@ import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * 
+ * @author Christopher Runyan, Hoang Le
+ */
 public class Alarm {
 	public String currentTime;
 	String year = "";
@@ -23,7 +24,16 @@ public class Alarm {
 	String minute = "";
 	String message = "";
 	boolean timer=false;
+	int snoozed=0;
 	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+	
+	public void addToSnoozed(){
+		this.snoozed++;
+	}
+	
+	public int returnSnoozed(){
+		return snoozed;
+	}
 	
 	//get current time 
 	public String getCurrentTime(){
@@ -37,10 +47,20 @@ public class Alarm {
 		Timer timer=new Timer();
 		try {
 			Date date=sdf.parse(month+"/"+day+"/"+year+" "+hour+":"+minute);
-			timer.schedule(new MyTimeTask(), date);
+			timer.schedule(new MyTimeTask(this), date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean equals(Alarm a){
+		boolean equals=false;
+		
+		if(this.year.equals(a.year)&&this.month.equals(a.month)&&this.day.equals(a.day)&&this.hour.equals(a.hour)&&this.minute.equals(a.minute)&&this.message.equals(a.message)){
+			equals=true;
+		}
+			
+		return equals;
 	}
 	
 	/**
@@ -241,11 +261,4 @@ public class Alarm {
 
 		return tostring;
 	}
-	
-	private static class MyTimeTask extends TimerTask {
-	      public void run() {
-	    	  JFrame frame=new JFrame();
-	    	  JOptionPane.showMessageDialog(frame, "ALARM");
-	      }
-	   }
 }

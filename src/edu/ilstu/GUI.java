@@ -11,7 +11,6 @@ import javax.swing.JTextArea;
 
 /**
  * @author Kevin Haas, Christopher Runyan
- *
  */
 @SuppressWarnings("serial")
 public class GUI extends JFrame {
